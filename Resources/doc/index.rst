@@ -64,4 +64,4 @@ for compilation.
 You can also have a look at the DemoCompilationController for a starting point.
 
 
-_ twig.js: https://github.com/schmittjoh/twig.js
+.. _twig.js: https://github.com/schmittjoh/twig.js
