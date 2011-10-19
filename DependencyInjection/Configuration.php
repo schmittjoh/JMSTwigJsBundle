@@ -35,7 +35,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('jms_twig_js');
+        $rootNode = $treeBuilder->root('twig_js');
 
         return $treeBuilder;
     }

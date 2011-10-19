@@ -18,8 +18,20 @@
 
 namespace JMS\TwigJsBundle;
 
+use JMS\TwigJsBundle\DependencyInjection\Compiler\MountFilterCompilersPass;
+use JMS\TwigJsBundle\DependencyInjection\JMSTwigJsExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class JMSTwigJsBundle extends Bundle
 {
+    public function getContainerExtension()
+    {
+        return new JMSTwigJsExtension();
+    }
+
+    public function build(ContainerBuilder $container)
+    {
+        $container->addCompilerPass(new MountFilterCompilersPass());
+    }
 }

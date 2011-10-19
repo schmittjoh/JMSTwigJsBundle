@@ -43,7 +43,7 @@ class DemoCompilationController extends ContainerAware
         $compileRequest = new CompileRequest($request->query->get('name'), null);
 
         return new Response(
-            $this->container->get('jms_twig_js.compile_request_handler')
+            $this->container->get('twig_js.compile_request_handler')
                     ->process($compileRequest),
             200,
             array('Content-Type' => 'application/javascript')

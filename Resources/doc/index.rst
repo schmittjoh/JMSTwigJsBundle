@@ -58,7 +58,7 @@ See twig.js_ documentation for how to render your templates.
 Custom Integration
 ~~~~~~~~~~~~~~~~~~
 If you need to customize your integration, this bundle makes a service named
-"jms_twig_js.compilation_request_handler" available, which is the entry point
+"twig_js.compilation_request_handler" available, which is the entry point
 for compilation.
 
 You can also have a look at the DemoCompilationController for a starting point.

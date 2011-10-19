@@ -4,7 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="_jms_twig_js_compile" pattern="/compile">
+    <route id="_twig_js_compile" pattern="/compile">
         <default key="_controller">JMSTwigJsBundle:DemoCompilation:compile</default>
     </route>
 </routes>

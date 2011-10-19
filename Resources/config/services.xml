@@ -5,29 +5,29 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="jms_twig_js.compile_request_handler.class">TwigJs\CompileRequestHandler</parameter>
-        <parameter key="jms_twig_js.compiler.class">TwigJs\JsCompiler</parameter>
+        <parameter key="twig_js.compile_request_handler.class">TwigJs\CompileRequestHandler</parameter>
+        <parameter key="twig_js.compiler.class">TwigJs\JsCompiler</parameter>
     
-        <parameter key="jms_twig_js.assetic_filter.class">TwigJs\Assetic\TwigJsFilter</parameter>
-        <parameter key="jms_twig_js.twig_js_extension.class">TwigJs\Twig\TwigJsExtension</parameter>
+        <parameter key="twig_js.assetic_filter.class">TwigJs\Assetic\TwigJsFilter</parameter>
+        <parameter key="twig_js.twig_js_extension.class">TwigJs\Twig\TwigJsExtension</parameter>
     </parameters>
 
     <services>
-        <service id="jms_twig_js.compiler" class="%jms_twig_js.compiler.class%" public="false">
+        <service id="twig_js.compiler" class="%twig_js.compiler.class%" public="false">
             <argument type="service" id="twig" />
         </service>
     
-        <service id="jms_twig_js.compile_request_handler" class="%jms_twig_js.compile_request_handler.class%">
+        <service id="twig_js.compile_request_handler" class="%twig_js.compile_request_handler.class%">
             <argument type="service" id="twig" />
-            <argument type="service" id="jms_twig_js.compiler" />
+            <argument type="service" id="twig_js.compiler" />
         </service>
     
-        <service id="jms_twig_js.assetic_filter" class="%jms_twig_js.assetic_filter.class%">
-            <argument type="service" id="jms_twig_js.compile_request_handler" />
+        <service id="twig_js.assetic_filter" class="%twig_js.assetic_filter.class%">
+            <argument type="service" id="twig_js.compile_request_handler" />
             <tag name="assetic.filter" alias="twig_js" />
         </service>
         
-        <service id="jms_twig_js.twig_js_extension" class="%jms_twig_js.twig_js_extension.class%" public="false">
+        <service id="twig_js.twig_js_extension" class="%twig_js.twig_js_extension.class%" public="false">
             <tag name="twig.extension" alias="twig_js" />
         </service>
     </services>
