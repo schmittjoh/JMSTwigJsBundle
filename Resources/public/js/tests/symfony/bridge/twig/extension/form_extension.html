@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>form_extension.js test</title>
+</head>
+<body>
+    <script language="javascript" type="text/javascript" src="http://closure-library.googlecode.com/svn/trunk/closure/goog/base.js"></script>
+    <script language="javascript" type="text/javascript">
+        goog.require('goog.string');
+        goog.require('goog.string.StringBuffer');
+    </script>
+    
+    <script language="javascript" type="text/javascript" src="../../../../../symfony.dev.js"></script>
+    <!--<script language="javascript" type="text/javascript" src="../../../../../src/php.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../src/php/array.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../src/symfony.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../src/twig.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../src/twig/extension_interface.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../src/twig/extension.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../src/twig/template.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../src/twig/environment.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../src/symfony/bridge/twig/extension/form_extension.js"></script>-->
+    <script language="javascript" type="text/javascript" src="./templates/js/form_div_layout.html.js"></script>
+    <script language="javascript" type="text/javascript">
+        goog.require('goog.testing.asserts');
+        goog.require('goog.testing.jsunit');
+        goog.require('goog.testing.FunctionMock');
+
+        function testRenderLabelBlockWithEmptyLabel() {
+            var template = createTemplate();
+
+            var formView = createFormView();
+
+            assertEquals(
+                twig.spaceless('<label></label>'),
+                twig.spaceless(template.renderBlock("form_label", {
+                    form: formView
+                }))
+            );
+        }
+
+        function testRenderLabelBlockWithNonEmptyLabel() {
+            var template = createTemplate();
+
+            var formView = createFormView();
+
+            assertEquals(
+                twig.spaceless('<label>my_label</label>'),
+                twig.spaceless(template.renderBlock("form_label", {
+                    form: formView,
+                    label: "my_label"
+                }))
+            );
+        }
+
+        function testRenderLabelBlockWithRequiredFalse() {
+            var template = createTemplate();
+
+            var formView = createFormView();
+
+            assertEquals(
+                twig.spaceless('<label></label>'),
+                twig.spaceless(template.renderBlock("form_label", {
+                    form: formView,
+                    required: false
+                }))
+            );
+        }
+
+        function testRenderLabelBlockWithRequiredTrue() {
+            var template = createTemplate();
+
+            var formView = createFormView();
+
+            assertEquals(
+                twig.spaceless('<label class=" required"></label>'),
+                twig.spaceless(template.renderBlock("form_label", {
+                    form: formView,
+                    attr: {
+
+                    },
+                    required: true
+                }))
+            );
+        }
+
+        function testRenderLabelBlockWithAttributes() {
+            var template = createTemplate();
+
+            var formView = createFormView();
+
+            assertEquals(
+                twig.spaceless('<label></label>'),
+                twig.spaceless(template.renderBlock("form_label", {
+                    form: formView,
+                    attr: {
+
+                    }
+                }))
+            );
+        }
+
+        function createTemplate() {
+            var env = new twig.Environment();
+            
+            env.setFilter('trans', function(value) {
+                return value;
+            });
+
+            return env.createTemplate(form_div_layout.html);
+        }
+
+        function createFormView() {
+            var formView = new symfony.component.form.FormView();
+
+            formView.set("id", "the_id_fixme");
+            formView.set("types", ["field", "form"]);
+
+            return formView;
+        }
+
+//        function createFormView() {
+//            var theFormView = new twig.FormView();
+//
+//            theFormView.set("id", "the_id_fixme");
+//            theFormView.set("types", ["field", "form"]);
+////            theFormView.set("errors", []);
+//
+//
+////            var keyFormView = new twig.FormView();
+//
+////            keyFormView.set("id", "the_id_fixmen");
+////            keyFormView.set("types", ["field", "form"]);
+//
+////            theFormView.set("key", keyFormView);
+//
+//            return theFormView;
+//        }
+    </script>
+</body>
+</html>
