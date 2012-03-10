@@ -34,8 +34,8 @@ symfony.bridge.twig.extension.FormExtension = function(opt_csrfProvider, opt_res
     this.csrfProvider = opt_csrfProvider;
 
     /**
-     * Note: "number" type is actually symfony.component.form.FormView, however, 
-     * a UID for the symfony.component.form.FormView is used so that it can be 
+     * Note: "number" type is actually symfony.component.form.FormView, however,
+     * a UID for the symfony.component.form.FormView is used so that it can be
      * stored in a hash.
      *
      * @type {Object.<number, Object>}
@@ -47,8 +47,8 @@ symfony.bridge.twig.extension.FormExtension = function(opt_csrfProvider, opt_res
     this.template = null;
 
     /**
-     * Note: "Object" type is actually symfony.component.form.FormView, however, 
-     * a UID for the symfony.component.form.FormView is used so that it can be 
+     * Note: "Object" type is actually symfony.component.form.FormView, however,
+     * a UID for the symfony.component.form.FormView is used so that it can be
      * stored in a hash.
      *
      * @type {Object.<number, Object>}
@@ -77,6 +77,21 @@ symfony.bridge.twig.extension.FormExtension.prototype.initRuntime = function(env
 };
 
 /**
+ * Renders the HTML enctype in the form tag, if necessary
+ *
+ * Example usage in Twig templates:
+ *
+ *     <form action="..." method="post" {{ form_enctype(form) }}>
+ *
+ * @param {symfony.component.form.FormView} view The view for which to render the encoding type
+ *
+ * @return {string} The HTML markup
+ */
+symfony.bridge.twig.extension.FormExtension.prototype.renderEnctype = function(view) {
+    return this.render(view, "enctype");
+};
+
+/**
  * Renders a row for the view.
  *
  * @param {symfony.component.form.FormView} view The view to render as a row
@@ -89,6 +104,40 @@ symfony.bridge.twig.extension.FormExtension.prototype.renderRow = function(view,
 };
 
 /**
+ * Renders views which have not already been rendered.
+ *
+ * @param {symfony.component.form.FormView} view The parent view
+ * @param {Object=} opt_variables An array of variables
+ *
+ * @return {string} The HTML markup
+ */
+symfony.bridge.twig.extension.FormExtension.prototype.renderRest = function(view, opt_variables) {
+    return this.render(view, "rest", opt_variables);
+};
+
+/**
+ * Renders the HTML for a given view.
+ *
+ * Example usage in Twig:
+ *
+ *     {{ form_widget(view) }}
+ *
+ * You can pass options during the call:
+ *
+ *     {{ form_widget(view, {'attr': {'class': 'foo'}}) }}
+ *
+ *     {{ form_widget(view, {'separator': '+++++'}) }}
+ *
+ * @param {symfony.component.form.FormView} view The view to render
+ * @param {Object=} opt_variables An array of variables
+ *
+ * @return {string} The HTML markup
+ */
+symfony.bridge.twig.extension.FormExtension.prototype.renderWidget = function(view, opt_variables) {
+    return this.render(view, "widget", opt_variables);
+};
+
+/**
  * Renders the errors of the given view.
  *
  * @param {symfony.component.form.FormView} view The view to render the errors for
@@ -97,6 +146,23 @@ symfony.bridge.twig.extension.FormExtension.prototype.renderRow = function(view,
  */
 symfony.bridge.twig.extension.FormExtension.prototype.renderErrors = function(view) {
     return this.render(view, "errors");
+};
+
+/**
+ * Renders the label of the given view.
+ *
+ * @param {symfony.component.form.FormView} view The view to render the label for
+ * @param {string=} opt_label Label name
+ * @param {Object=} opt_variables An array of variables
+ *
+ * @return {string} The HTML markup
+ */
+symfony.bridge.twig.extension.FormExtension.prototype.renderLabel = function(view, opt_label, opt_variables) {
+    if (opt_label !== null) {
+        opt_variables["label"] = opt_label;
+    }
+
+    return this.render(view, "label", opt_variables);
 };
 
 /**
@@ -213,7 +279,7 @@ symfony.bridge.twig.extension.FormExtension.prototype.getBlocks = function(view)
 
         /** @type {Object} */
         var blocks = {};
-        
+
         /** @type {twig.Environment} */
         var env = this.env_;
 

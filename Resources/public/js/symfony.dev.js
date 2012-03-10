@@ -253,7 +253,7 @@ function $twig$count$$($v$$2$$) {
   throw Error(typeof $v$$2$$ + " is not countable.");
 }
 function $twig$forEach$$($v$$3$$, $func$$3$$, $opt_this$$2$$) {
-  $goog$isArray$$($v$$3$$) ? $goog$array$forEach$$($v$$3$$, $func$$3$$, $opt_this$$2$$) : $goog$object$forEach$$($v$$3$$, $func$$3$$, $opt_this$$2$$)
+  $goog$isArray$$($v$$3$$) ? $goog$array$forEach$$($v$$3$$, $func$$3$$, $opt_this$$2$$) : ($v$$3$$ = $v$$3$$.children, $goog$object$forEach$$($v$$3$$, $func$$3$$, $opt_this$$2$$))
 }
 ;function $twig$array$merge$$($var_args$$53$$) {
   var $args$$3$$ = Array.prototype.slice.call(arguments), $argl$$ = $args$$3$$.length, $arg$$5_retArr$$, $retObj$$ = {}, $k$$1$$ = "", $argil$$ = 0, $j$$5$$ = 0, $i$$48$$ = 0, $ct$$ = 0, $toStr$$ = Object.prototype.toString;
@@ -485,48 +485,48 @@ $goog$exportSymbol$$("twig.array.replaceRecursive", $twig$array$replaceRecursive
 $goog$exportSymbol$$("twig.filter.capitalize", function($env$$1$$, $str$$46$$) {
   return $str$$46$$.charAt(0).toUpperCase() + $str$$46$$.substring(1)
 });
-$goog$exportSymbol$$("twig.filter.escape", function($env$$2_s$$inline_15_str$$inline_174$$, $sb$$inline_16_value$$61$$, $i$$inline_17_opt_type$$5$$, $JSCompiler_temp_const$$166_opt_charset$$, $JSCompiler_temp_const$$165_opt_autoescape$$) {
-  if($JSCompiler_temp_const$$165_opt_autoescape$$ && $sb$$inline_16_value$$61$$ instanceof $twig$Markup$$) {
+$goog$exportSymbol$$("twig.filter.escape", function($env$$2_s$$inline_15_str$$inline_190$$, $sb$$inline_16_value$$61$$, $i$$inline_17_opt_type$$5$$, $JSCompiler_temp_const$$182_opt_charset$$, $JSCompiler_temp_const$$181_opt_autoescape$$) {
+  if($JSCompiler_temp_const$$181_opt_autoescape$$ && $sb$$inline_16_value$$61$$ instanceof $twig$Markup$$) {
     return $sb$$inline_16_value$$61$$.toString()
   }
   $sb$$inline_16_value$$61$$ = $sb$$inline_16_value$$61$$ == $JSCompiler_alias_NULL$$ ? "" : "" + $sb$$inline_16_value$$61$$;
   if("js" === $i$$inline_17_opt_type$$5$$) {
-    $env$$2_s$$inline_15_str$$inline_174$$ = "" + $sb$$inline_16_value$$61$$;
-    if($env$$2_s$$inline_15_str$$inline_174$$.quote) {
-      $sb$$inline_16_value$$61$$ = $env$$2_s$$inline_15_str$$inline_174$$.quote()
+    $env$$2_s$$inline_15_str$$inline_190$$ = "" + $sb$$inline_16_value$$61$$;
+    if($env$$2_s$$inline_15_str$$inline_190$$.quote) {
+      $sb$$inline_16_value$$61$$ = $env$$2_s$$inline_15_str$$inline_190$$.quote()
     }else {
       $sb$$inline_16_value$$61$$ = ['"'];
-      for($i$$inline_17_opt_type$$5$$ = 0;$i$$inline_17_opt_type$$5$$ < $env$$2_s$$inline_15_str$$inline_174$$.length;$i$$inline_17_opt_type$$5$$++) {
-        var $JSCompiler_temp$$168_c$$inline_169_ch$$inline_18$$ = $env$$2_s$$inline_15_str$$inline_174$$.charAt($i$$inline_17_opt_type$$5$$), $cc$$inline_19_rv$$inline_170$$ = $JSCompiler_temp$$168_c$$inline_169_ch$$inline_18$$.charCodeAt(0), $JSCompiler_temp_const$$166_opt_charset$$ = $sb$$inline_16_value$$61$$, $JSCompiler_temp_const$$165_opt_autoescape$$ = $i$$inline_17_opt_type$$5$$ + 1, $JSCompiler_temp$$167_cc$$inline_171$$;
-        if(!($JSCompiler_temp$$167_cc$$inline_171$$ = $goog$string$specialEscapeChars_$$[$JSCompiler_temp$$168_c$$inline_169_ch$$inline_18$$])) {
-          if(!(31 < $cc$$inline_19_rv$$inline_170$$ && 127 > $cc$$inline_19_rv$$inline_170$$)) {
-            if($JSCompiler_temp$$168_c$$inline_169_ch$$inline_18$$ in $goog$string$jsEscapeCache_$$) {
-              $JSCompiler_temp$$168_c$$inline_169_ch$$inline_18$$ = $goog$string$jsEscapeCache_$$[$JSCompiler_temp$$168_c$$inline_169_ch$$inline_18$$]
+      for($i$$inline_17_opt_type$$5$$ = 0;$i$$inline_17_opt_type$$5$$ < $env$$2_s$$inline_15_str$$inline_190$$.length;$i$$inline_17_opt_type$$5$$++) {
+        var $JSCompiler_temp$$184_c$$inline_185_ch$$inline_18$$ = $env$$2_s$$inline_15_str$$inline_190$$.charAt($i$$inline_17_opt_type$$5$$), $cc$$inline_19_rv$$inline_186$$ = $JSCompiler_temp$$184_c$$inline_185_ch$$inline_18$$.charCodeAt(0), $JSCompiler_temp_const$$182_opt_charset$$ = $sb$$inline_16_value$$61$$, $JSCompiler_temp_const$$181_opt_autoescape$$ = $i$$inline_17_opt_type$$5$$ + 1, $JSCompiler_temp$$183_cc$$inline_187$$;
+        if(!($JSCompiler_temp$$183_cc$$inline_187$$ = $goog$string$specialEscapeChars_$$[$JSCompiler_temp$$184_c$$inline_185_ch$$inline_18$$])) {
+          if(!(31 < $cc$$inline_19_rv$$inline_186$$ && 127 > $cc$$inline_19_rv$$inline_186$$)) {
+            if($JSCompiler_temp$$184_c$$inline_185_ch$$inline_18$$ in $goog$string$jsEscapeCache_$$) {
+              $JSCompiler_temp$$184_c$$inline_185_ch$$inline_18$$ = $goog$string$jsEscapeCache_$$[$JSCompiler_temp$$184_c$$inline_185_ch$$inline_18$$]
             }else {
-              if($JSCompiler_temp$$168_c$$inline_169_ch$$inline_18$$ in $goog$string$specialEscapeChars_$$) {
-                $JSCompiler_temp$$168_c$$inline_169_ch$$inline_18$$ = $goog$string$jsEscapeCache_$$[$JSCompiler_temp$$168_c$$inline_169_ch$$inline_18$$] = $goog$string$specialEscapeChars_$$[$JSCompiler_temp$$168_c$$inline_169_ch$$inline_18$$]
+              if($JSCompiler_temp$$184_c$$inline_185_ch$$inline_18$$ in $goog$string$specialEscapeChars_$$) {
+                $JSCompiler_temp$$184_c$$inline_185_ch$$inline_18$$ = $goog$string$jsEscapeCache_$$[$JSCompiler_temp$$184_c$$inline_185_ch$$inline_18$$] = $goog$string$specialEscapeChars_$$[$JSCompiler_temp$$184_c$$inline_185_ch$$inline_18$$]
               }else {
-                $cc$$inline_19_rv$$inline_170$$ = $JSCompiler_temp$$168_c$$inline_169_ch$$inline_18$$;
-                $JSCompiler_temp$$167_cc$$inline_171$$ = $JSCompiler_temp$$168_c$$inline_169_ch$$inline_18$$.charCodeAt(0);
-                if(31 < $JSCompiler_temp$$167_cc$$inline_171$$ && 127 > $JSCompiler_temp$$167_cc$$inline_171$$) {
-                  $cc$$inline_19_rv$$inline_170$$ = $JSCompiler_temp$$168_c$$inline_169_ch$$inline_18$$
+                $cc$$inline_19_rv$$inline_186$$ = $JSCompiler_temp$$184_c$$inline_185_ch$$inline_18$$;
+                $JSCompiler_temp$$183_cc$$inline_187$$ = $JSCompiler_temp$$184_c$$inline_185_ch$$inline_18$$.charCodeAt(0);
+                if(31 < $JSCompiler_temp$$183_cc$$inline_187$$ && 127 > $JSCompiler_temp$$183_cc$$inline_187$$) {
+                  $cc$$inline_19_rv$$inline_186$$ = $JSCompiler_temp$$184_c$$inline_185_ch$$inline_18$$
                 }else {
-                  if(256 > $JSCompiler_temp$$167_cc$$inline_171$$) {
-                    if($cc$$inline_19_rv$$inline_170$$ = "\\x", 16 > $JSCompiler_temp$$167_cc$$inline_171$$ || 256 < $JSCompiler_temp$$167_cc$$inline_171$$) {
-                      $cc$$inline_19_rv$$inline_170$$ += "0"
+                  if(256 > $JSCompiler_temp$$183_cc$$inline_187$$) {
+                    if($cc$$inline_19_rv$$inline_186$$ = "\\x", 16 > $JSCompiler_temp$$183_cc$$inline_187$$ || 256 < $JSCompiler_temp$$183_cc$$inline_187$$) {
+                      $cc$$inline_19_rv$$inline_186$$ += "0"
                     }
                   }else {
-                    $cc$$inline_19_rv$$inline_170$$ = "\\u", 4096 > $JSCompiler_temp$$167_cc$$inline_171$$ && ($cc$$inline_19_rv$$inline_170$$ += "0")
+                    $cc$$inline_19_rv$$inline_186$$ = "\\u", 4096 > $JSCompiler_temp$$183_cc$$inline_187$$ && ($cc$$inline_19_rv$$inline_186$$ += "0")
                   }
-                  $cc$$inline_19_rv$$inline_170$$ += $JSCompiler_temp$$167_cc$$inline_171$$.toString(16).toUpperCase()
+                  $cc$$inline_19_rv$$inline_186$$ += $JSCompiler_temp$$183_cc$$inline_187$$.toString(16).toUpperCase()
                 }
-                $JSCompiler_temp$$168_c$$inline_169_ch$$inline_18$$ = $goog$string$jsEscapeCache_$$[$JSCompiler_temp$$168_c$$inline_169_ch$$inline_18$$] = $cc$$inline_19_rv$$inline_170$$
+                $JSCompiler_temp$$184_c$$inline_185_ch$$inline_18$$ = $goog$string$jsEscapeCache_$$[$JSCompiler_temp$$184_c$$inline_185_ch$$inline_18$$] = $cc$$inline_19_rv$$inline_186$$
               }
             }
           }
-          $JSCompiler_temp$$167_cc$$inline_171$$ = $JSCompiler_temp$$168_c$$inline_169_ch$$inline_18$$
+          $JSCompiler_temp$$183_cc$$inline_187$$ = $JSCompiler_temp$$184_c$$inline_185_ch$$inline_18$$
         }
-        $JSCompiler_temp_const$$166_opt_charset$$[$JSCompiler_temp_const$$165_opt_autoescape$$] = $JSCompiler_temp$$167_cc$$inline_171$$
+        $JSCompiler_temp_const$$182_opt_charset$$[$JSCompiler_temp_const$$181_opt_autoescape$$] = $JSCompiler_temp$$183_cc$$inline_187$$
       }
       $sb$$inline_16_value$$61$$.push('"');
       $sb$$inline_16_value$$61$$ = $sb$$inline_16_value$$61$$.join("")
@@ -534,8 +534,8 @@ $goog$exportSymbol$$("twig.filter.escape", function($env$$2_s$$inline_15_str$$in
     return $sb$$inline_16_value$$61$$.substring(1, $sb$$inline_16_value$$61$$.length - 1)
   }
   if(!$i$$inline_17_opt_type$$5$$ || "html" === $i$$inline_17_opt_type$$5$$) {
-    return $env$$2_s$$inline_15_str$$inline_174$$ = $sb$$inline_16_value$$61$$, $goog$string$allRe_$$.test($env$$2_s$$inline_15_str$$inline_174$$) && (-1 != $env$$2_s$$inline_15_str$$inline_174$$.indexOf("&") && ($env$$2_s$$inline_15_str$$inline_174$$ = $env$$2_s$$inline_15_str$$inline_174$$.replace($goog$string$amperRe_$$, "&amp;")), -1 != $env$$2_s$$inline_15_str$$inline_174$$.indexOf("<") && ($env$$2_s$$inline_15_str$$inline_174$$ = $env$$2_s$$inline_15_str$$inline_174$$.replace($goog$string$ltRe_$$, 
-    "&lt;")), -1 != $env$$2_s$$inline_15_str$$inline_174$$.indexOf(">") && ($env$$2_s$$inline_15_str$$inline_174$$ = $env$$2_s$$inline_15_str$$inline_174$$.replace($goog$string$gtRe_$$, "&gt;")), -1 != $env$$2_s$$inline_15_str$$inline_174$$.indexOf('"') && ($env$$2_s$$inline_15_str$$inline_174$$ = $env$$2_s$$inline_15_str$$inline_174$$.replace($goog$string$quotRe_$$, "&quot;"))), $env$$2_s$$inline_15_str$$inline_174$$
+    return $env$$2_s$$inline_15_str$$inline_190$$ = $sb$$inline_16_value$$61$$, $goog$string$allRe_$$.test($env$$2_s$$inline_15_str$$inline_190$$) && (-1 != $env$$2_s$$inline_15_str$$inline_190$$.indexOf("&") && ($env$$2_s$$inline_15_str$$inline_190$$ = $env$$2_s$$inline_15_str$$inline_190$$.replace($goog$string$amperRe_$$, "&amp;")), -1 != $env$$2_s$$inline_15_str$$inline_190$$.indexOf("<") && ($env$$2_s$$inline_15_str$$inline_190$$ = $env$$2_s$$inline_15_str$$inline_190$$.replace($goog$string$ltRe_$$, 
+    "&lt;")), -1 != $env$$2_s$$inline_15_str$$inline_190$$.indexOf(">") && ($env$$2_s$$inline_15_str$$inline_190$$ = $env$$2_s$$inline_15_str$$inline_190$$.replace($goog$string$gtRe_$$, "&gt;")), -1 != $env$$2_s$$inline_15_str$$inline_190$$.indexOf('"') && ($env$$2_s$$inline_15_str$$inline_190$$ = $env$$2_s$$inline_15_str$$inline_190$$.replace($goog$string$quotRe_$$, "&quot;"))), $env$$2_s$$inline_15_str$$inline_190$$
   }
   throw Error("The type '" + $i$$inline_17_opt_type$$5$$ + "' is not supported.");
 });
@@ -685,24 +685,37 @@ $JSCompiler_prototypeAlias$$ = $symfony$bridge$twig$extension$FormExtension$$.pr
 $JSCompiler_prototypeAlias$$.$initRuntime$ = function $$JSCompiler_prototypeAlias$$$$initRuntime$$($environment$$2$$) {
   this.env_ = $environment$$2$$
 };
-$JSCompiler_prototypeAlias$$.$renderRow$ = function $$JSCompiler_prototypeAlias$$$$renderRow$$($view$$3$$, $opt_variables$$) {
-  return this.$render$($view$$3$$, "row", $opt_variables$$)
+$JSCompiler_prototypeAlias$$.$renderEnctype$ = function $$JSCompiler_prototypeAlias$$$$renderEnctype$$($view$$3$$) {
+  return this.$render$($view$$3$$, "enctype")
 };
-$JSCompiler_prototypeAlias$$.$renderErrors$ = function $$JSCompiler_prototypeAlias$$$$renderErrors$$($view$$4$$) {
-  return this.$render$($view$$4$$, "errors")
+$JSCompiler_prototypeAlias$$.$renderRow$ = function $$JSCompiler_prototypeAlias$$$$renderRow$$($view$$4$$, $opt_variables$$) {
+  return this.$render$($view$$4$$, "row", $opt_variables$$)
 };
-$JSCompiler_prototypeAlias$$.$render$ = function $$JSCompiler_prototypeAlias$$$$render$$($view$$5$$, $html_section$$, $opt_variables$$1$$) {
-  var $opt_variables$$1$$ = $opt_variables$$1$$ || {}, $mainTemplate$$ = $html_section$$ in ["widget", "row"];
-  if($mainTemplate$$ && $view$$5$$.$isRendered$()) {
+$JSCompiler_prototypeAlias$$.$renderRest$ = function $$JSCompiler_prototypeAlias$$$$renderRest$$($view$$5$$, $opt_variables$$1$$) {
+  return this.$render$($view$$5$$, "rest", $opt_variables$$1$$)
+};
+$JSCompiler_prototypeAlias$$.$renderWidget$ = function $$JSCompiler_prototypeAlias$$$$renderWidget$$($view$$6$$, $opt_variables$$2$$) {
+  return this.$render$($view$$6$$, "widget", $opt_variables$$2$$)
+};
+$JSCompiler_prototypeAlias$$.$renderErrors$ = function $$JSCompiler_prototypeAlias$$$$renderErrors$$($view$$7$$) {
+  return this.$render$($view$$7$$, "errors")
+};
+$JSCompiler_prototypeAlias$$.$renderLabel$ = function $$JSCompiler_prototypeAlias$$$$renderLabel$$($view$$8$$, $opt_label$$, $opt_variables$$3$$) {
+  $opt_label$$ !== $JSCompiler_alias_NULL$$ && ($opt_variables$$3$$.label = $opt_label$$);
+  return this.$render$($view$$8$$, "label", $opt_variables$$3$$)
+};
+$JSCompiler_prototypeAlias$$.$render$ = function $$JSCompiler_prototypeAlias$$$$render$$($view$$9$$, $html_section$$, $opt_variables$$4$$) {
+  var $opt_variables$$4$$ = $opt_variables$$4$$ || {}, $mainTemplate$$ = $html_section$$ in ["widget", "row"];
+  if($mainTemplate$$ && $view$$9$$.$isRendered$()) {
     return""
   }
   $JSCompiler_alias_NULL$$ === this.$template$ && (this.$template$ = this.$resources$[0], this.$template$ instanceof $twig$Template$$ || (this.$template$ = this.env_.$createTemplate$($goog$getObjectByName$$(this.$template$))));
-  var $custom_typeIndex$$ = "_" + $view$$5$$.get("id") || "", $rendering$$ = $custom_typeIndex$$ + $html_section$$, $blocks$$1$$ = this.$getBlocks$($view$$5$$), $types$$ = [];
-  this.$varStack$[$rendering$$] ? ($custom_typeIndex$$ = this.$varStack$[$rendering$$].typeIndex - 1, $types$$ = this.$varStack$[$rendering$$].types, this.$varStack$[$rendering$$].variables = $php$array$replaceRecursive$$(this.$varStack$[$rendering$$].variables, $opt_variables$$1$$)) : ($types$$ = $view$$5$$.get("types") || [], $types$$.push($custom_typeIndex$$), $custom_typeIndex$$ = $types$$.length - 1, this.$varStack$[$rendering$$] = {variables:$php$array$replaceRecursive$$($view$$5$$.all(), $opt_variables$$1$$), 
+  var $custom_typeIndex$$ = "_" + $view$$9$$.get("id") || "", $rendering$$ = $custom_typeIndex$$ + $html_section$$, $blocks$$1$$ = this.$getBlocks$($view$$9$$), $types$$ = [];
+  this.$varStack$[$rendering$$] ? ($custom_typeIndex$$ = this.$varStack$[$rendering$$].typeIndex - 1, $types$$ = this.$varStack$[$rendering$$].types, this.$varStack$[$rendering$$].variables = $php$array$replaceRecursive$$(this.$varStack$[$rendering$$].variables, $opt_variables$$4$$)) : ($types$$ = $view$$9$$.get("types") || [], $types$$.push($custom_typeIndex$$), $custom_typeIndex$$ = $types$$.length - 1, this.$varStack$[$rendering$$] = {variables:$php$array$replaceRecursive$$($view$$9$$.all(), $opt_variables$$4$$), 
   types:$types$$});
   do {
     if($types$$[$custom_typeIndex$$] += "_" + $html_section$$, $blocks$$1$$[$types$$[$custom_typeIndex$$]]) {
-      return this.$varStack$[$rendering$$].typeIndex = $custom_typeIndex$$, $html_section$$ = this.$template$.$renderBlock$($types$$[$custom_typeIndex$$], this.$varStack$[$rendering$$].variables, $blocks$$1$$), $mainTemplate$$ && $view$$5$$.$setRendered$(), delete this.$varStack$[$rendering$$], $html_section$$
+      return this.$varStack$[$rendering$$].typeIndex = $custom_typeIndex$$, $html_section$$ = this.$template$.$renderBlock$($types$$[$custom_typeIndex$$], this.$varStack$[$rendering$$].variables, $blocks$$1$$), $mainTemplate$$ && $view$$9$$.$setRendered$(), delete this.$varStack$[$rendering$$], $html_section$$
     }
   }while(0 <= --$custom_typeIndex$$);
   throw Error('Unable to render the form as none of the following blocks exist: "' + $types$$.slice().reverse().toString() + '".');
@@ -710,12 +723,12 @@ $JSCompiler_prototypeAlias$$.$render$ = function $$JSCompiler_prototypeAlias$$$$
 $JSCompiler_prototypeAlias$$.getName = function $$JSCompiler_prototypeAlias$$$getName$() {
   return"form"
 };
-$JSCompiler_prototypeAlias$$.$getBlocks$ = function $$JSCompiler_prototypeAlias$$$$getBlocks$$($view$$6$$) {
-  if($goog$object$contains$$(this.$blocks$, $goog$getUid$$($view$$6$$))) {
-    $blocks$$2$$ = this.$blocks$[$goog$getUid$$($view$$6$$)]
+$JSCompiler_prototypeAlias$$.$getBlocks$ = function $$JSCompiler_prototypeAlias$$$$getBlocks$$($view$$10$$) {
+  if($goog$object$contains$$(this.$blocks$, $goog$getUid$$($view$$10$$))) {
+    $blocks$$2$$ = this.$blocks$[$goog$getUid$$($view$$10$$)]
   }else {
-    var $rootView$$ = !$view$$6$$.$hasParent$(), $templates$$ = $rootView$$ ? this.$resources$ : {};
-    this.$themes$[$goog$getUid$$($view$$6$$)] && ($templates$$ = $php$array$merge$$($templates$$, this.$themes$[$goog$getUid$$($view$$6$$)]));
+    var $rootView$$ = !$view$$10$$.$hasParent$(), $templates$$ = $rootView$$ ? this.$resources$ : {};
+    this.$themes$[$goog$getUid$$($view$$10$$)] && ($templates$$ = $php$array$merge$$($templates$$, this.$themes$[$goog$getUid$$($view$$10$$)]));
     var $blocks$$2$$ = {}, $env$$4$$ = this.env_;
     $twig$forEach$$($templates$$, function($template$$2$$) {
       $template$$2$$ instanceof $twig$Template$$ || ($template$$2$$ = $env$$4$$.$createTemplate$($goog$getObjectByName$$($template$$2$$)));
@@ -725,8 +738,8 @@ $JSCompiler_prototypeAlias$$.$getBlocks$ = function $$JSCompiler_prototypeAlias$
       }while($JSCompiler_alias_FALSE$$ !== ($template$$2$$ = $template$$2$$.getParent([])));
       $blocks$$2$$ = $php$array$merge$$($blocks$$2$$, $templateBlocks$$)
     });
-    $rootView$$ || ($blocks$$2$$ = $php$array$merge$$(this.$getBlocks$($view$$6$$.getParent()), $blocks$$2$$));
-    this.$blocks$[$goog$getUid$$($view$$6$$)] = $blocks$$2$$
+    $rootView$$ || ($blocks$$2$$ = $php$array$merge$$(this.$getBlocks$($view$$10$$.getParent()), $blocks$$2$$));
+    this.$blocks$[$goog$getUid$$($view$$10$$)] = $blocks$$2$$
   }
   return $blocks$$2$$
 };
@@ -744,8 +757,12 @@ $symfony$component$form$FormView$$.prototype.setRendered = $symfony$component$fo
 $symfony$component$form$FormView$$.prototype.hasParent = $symfony$component$form$FormView$$.prototype.$hasParent$;
 $symfony$component$form$FormView$$.prototype.toString = $symfony$component$form$FormView$$.prototype.toString;
 $symfony$bridge$twig$extension$FormExtension$$.prototype.initRuntime = $symfony$bridge$twig$extension$FormExtension$$.prototype.$initRuntime$;
+$symfony$bridge$twig$extension$FormExtension$$.prototype.renderEnctype = $symfony$bridge$twig$extension$FormExtension$$.prototype.$renderEnctype$;
 $symfony$bridge$twig$extension$FormExtension$$.prototype.renderRow = $symfony$bridge$twig$extension$FormExtension$$.prototype.$renderRow$;
+$symfony$bridge$twig$extension$FormExtension$$.prototype.renderRest = $symfony$bridge$twig$extension$FormExtension$$.prototype.$renderRest$;
+$symfony$bridge$twig$extension$FormExtension$$.prototype.renderWidget = $symfony$bridge$twig$extension$FormExtension$$.prototype.$renderWidget$;
 $symfony$bridge$twig$extension$FormExtension$$.prototype.renderErrors = $symfony$bridge$twig$extension$FormExtension$$.prototype.$renderErrors$;
+$symfony$bridge$twig$extension$FormExtension$$.prototype.renderLabel = $symfony$bridge$twig$extension$FormExtension$$.prototype.$renderLabel$;
 $symfony$bridge$twig$extension$FormExtension$$.prototype.render = $symfony$bridge$twig$extension$FormExtension$$.prototype.$render$;
 $symfony$bridge$twig$extension$FormExtension$$.prototype.getBlocks = $symfony$bridge$twig$extension$FormExtension$$.prototype.$getBlocks$;
 window.Twig.$addExtension$(new $symfony$bridge$twig$extension$FormExtension$$(0, ["form_div_layout.html"]));

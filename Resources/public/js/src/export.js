@@ -45,8 +45,12 @@ goog.exportProperty(symfony.component.form.FormView.prototype, 'hasParent', symf
 goog.exportProperty(symfony.component.form.FormView.prototype, 'toString', symfony.component.form.FormView.prototype.toString);
 
 goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, 'initRuntime', symfony.bridge.twig.extension.FormExtension.prototype.initRuntime);
+goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, 'renderEnctype', symfony.bridge.twig.extension.FormExtension.prototype.renderEnctype);
 goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, 'renderRow', symfony.bridge.twig.extension.FormExtension.prototype.renderRow);
+goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, 'renderRest', symfony.bridge.twig.extension.FormExtension.prototype.renderRest);
+goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, 'renderWidget', symfony.bridge.twig.extension.FormExtension.prototype.renderWidget);
 goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, 'renderErrors', symfony.bridge.twig.extension.FormExtension.prototype.renderErrors);
+goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, 'renderLabel', symfony.bridge.twig.extension.FormExtension.prototype.renderLabel);
 goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, 'render', symfony.bridge.twig.extension.FormExtension.prototype.render);
 goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, 'getBlocks', symfony.bridge.twig.extension.FormExtension.prototype.getBlocks);
 
