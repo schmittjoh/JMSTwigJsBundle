@@ -163,6 +163,30 @@
             );
         }
 
+        function testRenderFieldEnctypeBlock() {
+            var template = createTemplate();
+
+            assertEquals(
+                twig.spaceless('enctype="multipart/form-data"'),
+                twig.spaceless(template.renderBlock("field_enctype", {
+                    multipart: true
+                }))
+            );
+
+            assertEquals(
+                twig.spaceless(''),
+                twig.spaceless(template.renderBlock("field_enctype", {
+                    multipart: false
+                }))
+            );
+
+            assertEquals(
+                twig.spaceless(''),
+                twig.spaceless(template.renderBlock("field_enctype", {
+                }))
+            );
+        }
+
         function createTemplate() {
             var env = new twig.Environment();
 
