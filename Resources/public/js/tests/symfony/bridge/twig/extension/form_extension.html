@@ -10,7 +10,7 @@
         goog.require('goog.string');
         goog.require('goog.string.StringBuffer');
     </script>
-    
+
     <script language="javascript" type="text/javascript" src="../../../../../symfony.dev.js"></script>
     <!--<script language="javascript" type="text/javascript" src="../../../../../src/php.js"></script>
     <script language="javascript" type="text/javascript" src="../../../../../src/php/array.js"></script>
@@ -91,20 +91,83 @@
             var formView = createFormView();
 
             assertEquals(
-                twig.spaceless('<label></label>'),
+                twig.spaceless('<label id="my-id"></label>'),
                 twig.spaceless(template.renderBlock("form_label", {
                     form: formView,
                     attr: {
-
+                        "id": "my-id"
                     }
+                }))
+            );
+
+            assertEquals(
+                twig.spaceless('<label id="my-id" class="my-class"></label>'),
+                twig.spaceless(template.renderBlock("form_label", {
+                    form: formView,
+                    attr: {
+                        "id": "my-id",
+                        "class": "my-class"
+                    }
+                }))
+            );
+        }
+
+        function testRenderLabelBlockWithRequiredTrueAndExtraClass() {
+            var template = createTemplate();
+
+            var formView = createFormView();
+
+            assertEquals(
+                twig.spaceless('<label class="my-class required"></label>'),
+                twig.spaceless(template.renderBlock("form_label", {
+                    form: formView,
+                    attr: {
+                        "class": "my-class"
+                    },
+                    required: true
+                }))
+            );
+        }
+
+        function testRenderFieldLabelBlockWithForAttribute() {
+            var template = createTemplate();
+
+            var formView = createFormView();
+
+            assertEquals(
+                twig.spaceless('<label for="my-id"></label>'),
+                twig.spaceless(template.renderBlock("field_label", {
+                    form: formView,
+                    attr: {
+                        "for": "the-for"
+                    },
+                    id: "my-id"
+                }))
+            );
+        }
+
+        function testRenderFieldLabelBlockWithNoForAttribute() {
+            var template = createTemplate();
+
+            var formView = createFormView();
+
+            assertEquals(
+                twig.spaceless('<label for="my-id"></label>'),
+                twig.spaceless(template.renderBlock("field_label", {
+                    form: formView,
+                    attr: {
+
+                    },
+                    id: "my-id"
                 }))
             );
         }
 
         function createTemplate() {
             var env = new twig.Environment();
-            
+
             env.setFilter('trans', function(value) {
+                // FIXME
                 return value;
             });
 
