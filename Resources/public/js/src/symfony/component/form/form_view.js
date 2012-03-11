@@ -17,6 +17,8 @@
 goog.provide('symfony.component.form.FormView');
 
 goog.require('goog.object');
+goog.require('goog.structs.Map');
+goog.require('goog.iter.Iterator');
 
 /**
  * @constructor
@@ -30,7 +32,7 @@ symfony.component.form.FormView = function() {
         "value": null,
         "attr": []
     };
-    
+
     /**
      * @type {symfony.component.form.FormView}
      * @private
@@ -38,11 +40,17 @@ symfony.component.form.FormView = function() {
     this.parent = null;
 
     /**
-     * @type {Array.<string, symfony.component.form.FormView>}
-     * @private 
+     * @type {Object.<symfony.component.form.FormView>}
+     * @private
      */
-    this.children = [];
-    
+    this.children_ = {};
+
+    /**
+     * @type {!Array.<string>}
+     * @private
+     */
+    this.childrenKeys_ = [];
+
     /**
      * @type {boolean}
      * @private
@@ -79,9 +87,7 @@ symfony.component.form.FormView.prototype.has = function(name) {
  */
 symfony.component.form.FormView.prototype.get = function(name, opt_default) {
     if (false === this.has(name)) {
-        opt_default = opt_default || null;
-
-        return opt_default;
+        return opt_default || null;
     }
 
     return this.vars[name];
@@ -98,7 +104,7 @@ symfony.component.form.FormView.prototype.all = function() {
  * @return {boolean}
  */
 symfony.component.form.FormView.prototype.isRendered = function() {
-    var hasChildren = 0 < this.children.length;
+    var hasChildren = 0 < this.childrenKeys_.length;
 
     if (true === this.rendered || !hasChildren) {
         return this.rendered;
@@ -110,8 +116,8 @@ symfony.component.form.FormView.prototype.isRendered = function() {
         /** @type {symfony.component.form.FormView} */
         var child;
 
-        for (i in this.children) {
-            child = this.children[i];
+        for (i in this.children_) {
+            child = this.children_[i];
 
             if (!child.isRendered()) {
                 return false;
@@ -125,19 +131,120 @@ symfony.component.form.FormView.prototype.isRendered = function() {
 };
 
 /**
- * @return {Object.<symfony.component.form.FormView>}
+ * @return {symfony.component.form.FormView}
  */
 symfony.component.form.FormView.prototype.setRendered = function() {
     this.rendered = true;
-    
+
     return this;
 };
 
 /**
+ * Sets the parent view.
+ *
+ * @param {symfony.component.form.FormView} parent The parent view
+ *
+ * @return {symfony.component.form.FormView} The current view
+ */
+symfony.component.form.FormView.prototype.setParent = function(parent) {
+    this.parent = parent;
+
+    return this;
+};
+
+/**
+ * Returns the parent view.
+ *
+ * @return {symfony.component.form.FormView} The parent view
+ */
+symfony.component.form.FormView.prototype.getParent = function() {
+    return this.parent;
+};
+
+/**
  * Returns whether this view has a parent.
- * 
+ *
  * @return {boolean} Whether this view has a parent
  */
 symfony.component.form.FormView.prototype.hasParent = function() {
     return null !== this.parent;
+};
+
+/**
+ * Sets the children view.
+ *
+ * @param {Object.<symfony.component.form.FormView>} children
+ *
+ * @return {symfony.component.form.FormView} The current view
+ */
+symfony.component.form.FormView.prototype.setChildren = function(children) {
+    goog.object.forEach(children, function(name, child) {
+        // FIXME: use goog.object.containsKey? What's the prefferred one / difference between the two?
+        if (!(goog.structs.Map.hasKey_(this.children_, name))) {
+            this.childrenKeys_.push(name);
+        }
+
+        this.children_[name] = child;
+    }, this);
+
+    return this;
+};
+
+/**
+ * Returns the children.
+ *
+ * @return {Object.<symfony.component.form.FormView>} The children as instances of FormView
+ */
+symfony.component.form.FormView.prototype.getChildren = function() {
+    return this.children_;
+};
+
+/**
+ * Returns the children.
+ *
+ * @param {string} name The name of the child
+ *
+ * @return {symfony.component.form.FormView} The children view
+ */
+symfony.component.form.FormView.prototype.getChild = function(name) {
+    return this.children_[name];
+};
+
+/**
+ * Returns whether this view has children.
+ *
+ * @return {boolean} Whether this view has children
+ */
+symfony.component.form.FormView.prototype.hasChildren = function() {
+    return this.childrenKeys_.length > 0;
+};
+
+/**
+ * Returns an iterator that iterates over the values or the keys in the map.
+ *
+ * This throws an exception if the map was mutated since the iterator was
+ * created.
+ *
+ * @param {boolean=} opt_keys True to iterate over the keys. False to iterate over the values.  The default value is false
+ *
+ * @return {!goog.iter.Iterator} An iterator over the values or keys in the map
+ */
+symfony.component.form.FormView.prototype.__iterator__ = function(opt_keys) {
+    var newIter = new goog.iter.Iterator();
+
+    var i = 0;
+    var children = this.children_;
+    var childrenKeys = this.childrenKeys_;
+
+    newIter.next = function() {
+        if (i >= childrenKeys.length) {
+            throw goog.iter.StopIteration;
+        }
+
+        var key = childrenKeys[i++];
+
+        return opt_keys ? key : children[key];
+    };
+
+    return newIter;
 };
