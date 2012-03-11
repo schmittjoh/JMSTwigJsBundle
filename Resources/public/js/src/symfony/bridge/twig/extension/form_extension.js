@@ -31,6 +31,8 @@ goog.require('twig.Template');
  * @param {Array.<*>=} opt_resources
  */
 symfony.bridge.twig.extension.FormExtension = function(opt_csrfProvider, opt_resources) {
+    twig.Extension.call(this);
+
     this.csrfProvider = opt_csrfProvider;
 
     /**
@@ -56,25 +58,12 @@ symfony.bridge.twig.extension.FormExtension = function(opt_csrfProvider, opt_res
     this.blocks = {};
 
     /**
-     * @type {twig.Environment}
-     * @private
-     **/
-    this.env_ = null;
-
-    /**
      * @type {Array}
      */
     this.resources = opt_resources || [];
 };
 
 twig.inherits(symfony.bridge.twig.extension.FormExtension, twig.Extension);
-
-/**
- * @param {twig.Environment} environment
- */
-symfony.bridge.twig.extension.FormExtension.prototype.initRuntime = function(environment) {
-    this.env_ = environment;
-};
 
 /**
  * Renders the HTML enctype in the form tag, if necessary
@@ -158,7 +147,7 @@ symfony.bridge.twig.extension.FormExtension.prototype.renderErrors = function(vi
  * @return {string} The HTML markup
  */
 symfony.bridge.twig.extension.FormExtension.prototype.renderLabel = function(view, opt_label, opt_variables) {
-    if (opt_label !== null) {
+    if (null !== opt_label) {
         opt_variables["label"] = opt_label;
     }
 
@@ -266,46 +255,48 @@ symfony.bridge.twig.extension.FormExtension.prototype.getName = function() {
  * @return {Object.<twig.Template>}
  */
 symfony.bridge.twig.extension.FormExtension.prototype.getBlocks = function(view) {
-    if (!goog.object.contains(this.blocks, goog.getUid(view))) {
-        /** @type {boolean} */
-        var rootView = !view.hasParent();
+    var uid = goog.getUid(view);
 
-        /** @type {Object} */
-        var templates = rootView ? this.resources : {};
-
-        if (this.themes[goog.getUid(view)]) {
-            templates = php.array.merge(templates, this.themes[goog.getUid(view)]);
-        }
-
-        /** @type {Object} */
-        var blocks = {};
-
-        /** @type {twig.Environment} */
-        var env = this.env_;
-
-        twig.forEach(/** @type {Array.<twig.Template|string>} */ templates, function(template) {
-            if (!(template instanceof twig.Template)) {
-                template = env.createTemplate(goog.getObjectByName(template));
-            }
-
-            var templateBlocks = {};
-
-            do {
-                templateBlocks = php.array.merge(template.getBlocks(), templateBlocks)
-            } while (false !== (template = template.getParent([])));
-
-
-            blocks = php.array.merge(blocks, templateBlocks);
-        });
-
-        if (!rootView) {
-            blocks = php.array.merge(this.getBlocks(view.getParent()), blocks);
-        }
-
-        this.blocks[goog.getUid(view)] = blocks;
-    } else {
-        blocks = this.blocks[goog.getUid(view)];
+    if (goog.object.contains(this.blocks, uid)) {
+        return this.blocks[uid];
     }
+
+    /** @type {boolean} */
+    var rootView = !view.hasParent();
+
+    /** @type {Object} */
+    var templates = rootView ? this.resources : {};
+
+    if (this.themes[uid]) {
+        templates = php.array.merge(templates, this.themes[uid]);
+    }
+
+    /** @type {Object} */
+    var blocks = {};
+
+    /** @type {twig.Environment} */
+    var env = this.env_;
+
+    twig.forEach(/** @type {Array.<twig.Template|string>} */ templates, function(template) {
+        if (!(template instanceof twig.Template)) {
+            template = env.createTemplate(goog.getObjectByName(template));
+        }
+
+        var templateBlocks = {};
+
+        do {
+            templateBlocks = php.array.merge(template.getBlocks(), templateBlocks)
+        } while (false !== (template = template.getParent([])));
+
+
+        blocks = php.array.merge(blocks, templateBlocks);
+    });
+
+    if (!rootView) {
+        blocks = php.array.merge(this.getBlocks(view.getParent()), blocks);
+    }
+
+    this.blocks[uid] = blocks;
 
     return blocks;
 };
