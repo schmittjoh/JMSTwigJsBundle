@@ -15,7 +15,5 @@
  */
 
 var externs = {
-	'render_': '',
-	'getParent_': '',
-	'env_': ''
+	"env_": ""
 };
