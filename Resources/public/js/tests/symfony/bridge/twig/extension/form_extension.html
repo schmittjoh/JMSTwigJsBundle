@@ -6,6 +6,7 @@
 </head>
 <body>
     <script language="javascript" type="text/javascript" src="http://closure-library.googlecode.com/svn/trunk/closure/goog/base.js"></script>
+<!--    <script language="javascript" type="text/javascript" src="../../../../../closure-library/closure/goog/base.js"></script>-->
     <script language="javascript" type="text/javascript">
         goog.require('goog.string');
         goog.require('goog.string.StringBuffer');
@@ -187,8 +188,40 @@
             );
         }
 
+        function testRenderFieldRestBlock() {
+            var template = createTemplate();
+
+            var formView = createFormView();
+
+            assertEquals(
+                twig.spaceless(''),
+                twig.spaceless(template.renderBlock("field_rest", {
+                    form: formView,
+                    attr: {}
+                }))
+            );
+        }
+
+//        function testRenderFormWidgetBlock() {
+//            var template = createTemplate();
+//
+//            var formView = createFormView();
+//
+//            formView.set("errors", {});
+//
+//            assertEquals(
+//                twig.spaceless(''),
+//                twig.spaceless(template.renderBlock("form_widget", {
+//                    form: formView,
+//                    attr: {}
+//                }))
+//            );
+//        }
+
         function createTemplate() {
             var env = new twig.Environment();
+
+            env.addExtension(new symfony.bridge.twig.extension.FormExtension(null, ["form_div_layout.html"]));
 
             env.setFilter('trans', function(value) {
                 // FIXME
