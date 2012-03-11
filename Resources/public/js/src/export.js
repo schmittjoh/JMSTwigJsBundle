@@ -16,49 +16,53 @@
 
 /**
  * @fileoverview Exports symbols which should be usuable from uncompiled code.
- * 
+ *
  * If you intend to compile the source libraries into your javascript on your
  * own, then you do not need this default export file.
  */
 
-goog.exportSymbol('goog.provide', goog.provide);
+goog.exportSymbol("goog.provide", goog.provide);
 
-goog.require('php');
+goog.exportSymbol("php.array.merge", php.array.merge);
+goog.exportSymbol("php.array.replaceRecursive", php.array.replaceRecursive);
 
-goog.exportSymbol('php.array.merge', php.array.merge);
-goog.exportSymbol('php.array.replaceRecursive', php.array.replaceRecursive);
+goog.require("symfony.component.form.FormView");
+goog.require("symfony.component.form.extension.core.type.FieldType");
+goog.require("symfony.bridge.twig.extension.FormExtension");
 
-goog.require('symfony');
-goog.require('symfony.component.form.FormView');
-goog.require('symfony.bridge.twig.extension.FormExtension');
+goog.exportSymbol("symfony.component.form.FormView", symfony.component.form.FormView);
+goog.exportSymbol("symfony.component.form.extension.core.type.FieldType", symfony.component.form.extension.core.type.FieldType);
+goog.exportSymbol("symfony.bridge.twig.extension.FormExtension", symfony.bridge.twig.extension.FormExtension);
 
-goog.exportSymbol('symfony.bridge.twig.extension.FormExtension', symfony.bridge.twig.extension.FormExtension);
-goog.exportSymbol('symfony.component.form.FormView', symfony.component.form.FormView);
+goog.exportProperty(symfony.component.form.FormView.prototype, "set", symfony.component.form.FormView.prototype.set);
+goog.exportProperty(symfony.component.form.FormView.prototype, "get", symfony.component.form.FormView.prototype.get);
+goog.exportProperty(symfony.component.form.FormView.prototype, "has", symfony.component.form.FormView.prototype.has);
+goog.exportProperty(symfony.component.form.FormView.prototype, "all", symfony.component.form.FormView.prototype.all);
+goog.exportProperty(symfony.component.form.FormView.prototype, "isRendered", symfony.component.form.FormView.prototype.isRendered);
+goog.exportProperty(symfony.component.form.FormView.prototype, "setRendered", symfony.component.form.FormView.prototype.setRendered);
+goog.exportProperty(symfony.component.form.FormView.prototype, "setParent", symfony.component.form.FormView.prototype.setParent);
+goog.exportProperty(symfony.component.form.FormView.prototype, "getParent", symfony.component.form.FormView.prototype.getParent);
+goog.exportProperty(symfony.component.form.FormView.prototype, "hasParent", symfony.component.form.FormView.prototype.hasParent);
+goog.exportProperty(symfony.component.form.FormView.prototype, "setChildren", symfony.component.form.FormView.prototype.setChildren);
+goog.exportProperty(symfony.component.form.FormView.prototype, "getChildren", symfony.component.form.FormView.prototype.getChildren);
+goog.exportProperty(symfony.component.form.FormView.prototype, "getChild", symfony.component.form.FormView.prototype.getChild);
+goog.exportProperty(symfony.component.form.FormView.prototype, "hasChildren", symfony.component.form.FormView.prototype.hasChildren);
+goog.exportProperty(symfony.component.form.FormView.prototype, "__iterator__", symfony.component.form.FormView.prototype.__iterator__);
 
-goog.exportProperty(symfony.component.form.FormView.prototype, 'set', symfony.component.form.FormView.prototype.set);
-goog.exportProperty(symfony.component.form.FormView.prototype, 'get', symfony.component.form.FormView.prototype.get);
-goog.exportProperty(symfony.component.form.FormView.prototype, 'has', symfony.component.form.FormView.prototype.has);
-goog.exportProperty(symfony.component.form.FormView.prototype, 'all', symfony.component.form.FormView.prototype.all);
-goog.exportProperty(symfony.component.form.FormView.prototype, 'isRendered', symfony.component.form.FormView.prototype.isRendered);
-goog.exportProperty(symfony.component.form.FormView.prototype, 'setRendered', symfony.component.form.FormView.prototype.setRendered);
-goog.exportProperty(symfony.component.form.FormView.prototype, 'hasParent', symfony.component.form.FormView.prototype.hasParent);
-goog.exportProperty(symfony.component.form.FormView.prototype, 'toString', symfony.component.form.FormView.prototype.toString);
-
-goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, 'initRuntime', symfony.bridge.twig.extension.FormExtension.prototype.initRuntime);
-goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, 'renderEnctype', symfony.bridge.twig.extension.FormExtension.prototype.renderEnctype);
-goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, 'renderRow', symfony.bridge.twig.extension.FormExtension.prototype.renderRow);
-goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, 'renderRest', symfony.bridge.twig.extension.FormExtension.prototype.renderRest);
-goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, 'renderWidget', symfony.bridge.twig.extension.FormExtension.prototype.renderWidget);
-goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, 'renderErrors', symfony.bridge.twig.extension.FormExtension.prototype.renderErrors);
-goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, 'renderLabel', symfony.bridge.twig.extension.FormExtension.prototype.renderLabel);
-goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, 'render', symfony.bridge.twig.extension.FormExtension.prototype.render);
-goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, 'getBlocks', symfony.bridge.twig.extension.FormExtension.prototype.getBlocks);
+goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, "renderEnctype", symfony.bridge.twig.extension.FormExtension.prototype.renderEnctype);
+goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, "renderRow", symfony.bridge.twig.extension.FormExtension.prototype.renderRow);
+goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, "renderRest", symfony.bridge.twig.extension.FormExtension.prototype.renderRest);
+goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, "renderWidget", symfony.bridge.twig.extension.FormExtension.prototype.renderWidget);
+goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, "renderErrors", symfony.bridge.twig.extension.FormExtension.prototype.renderErrors);
+goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, "renderLabel", symfony.bridge.twig.extension.FormExtension.prototype.renderLabel);
+goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, "render", symfony.bridge.twig.extension.FormExtension.prototype.render);
+goog.exportProperty(symfony.bridge.twig.extension.FormExtension.prototype, "getBlocks", symfony.bridge.twig.extension.FormExtension.prototype.getBlocks);
 
 /**
  * For now, we add a hard-coded form extension.
- * 
+ *
  * Later, this will be configurable (e.g. resources array).
- * 
+ *
  * FIXME
  */
 
