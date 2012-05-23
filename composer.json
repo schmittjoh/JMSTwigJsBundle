@@ -1,0 +1,23 @@
+{
+    "name": "jms/twig-js-bundle",
+    "type": "symfony-bundle",
+    "description": "Integrates twig.js into your Symfony2 application",
+    "keywords": ["templating"],
+    "homepage": "http://jmsyst.com/bundles/JMSTwigJsBundle",
+    "license": "Apache2",
+    "authors": [
+        {
+            "name": "Johannes M. Schmitt",
+            "email": "schmittjoh@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "jms/twig-js": "dev-master",
+        "symfony/framework-bundle": ">=2.0,<2.2-dev"
+    },
+    "autoload": {
+        "psr-0": { "JMS\\TwigJsBundle": "" }
+    },
+    "target-dir": "JMS/TwigJsBundle"
+}
