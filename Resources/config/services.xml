@@ -22,7 +22,7 @@
             <argument type="service" id="twig_js.compiler" />
         </service>
     
-        <service id="twig_js.assetic_filter" class="%twig_js.assetic_filter.class%">
+        <service id="assetic.filter.twig_js" class="%twig_js.assetic_filter.class%">
             <argument type="service" id="twig_js.compile_request_handler" />
             <tag name="assetic.filter" alias="twig_js" />
         </service>
