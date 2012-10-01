@@ -2,7 +2,8 @@
 
 namespace JMS\TwigJsBundle\TwigJs\Compiler;
 
-use Symfony\Component\Translation\Translator;
+use Symfony\Bundle\FrameworkBundle\Translation\Translator;
+use Symfony\Component\Translation\TranslatorInterface;
 use TwigJs\JsCompiler;
 use TwigJs\FilterCompilerInterface;
 
@@ -12,16 +13,9 @@ class TransFilterCompiler implements FilterCompilerInterface
     private $loadCatalogueRef;
     private $catalogueRef;
 
-    public function __construct(Translator $translator)
+    public function __construct(TranslatorInterface $translator)
     {
         $this->translator = $translator;
-
-        // unfortunately, the Translation component does not provide a better
-        // way to retrieve these
-        $this->loadCatalogueRef = new \ReflectionMethod($this->translator, 'loadCatalogue');
-        $this->loadCatalogueRef->setAccessible(true);
-        $this->catalogueRef = new \ReflectionProperty($this->translator, 'catalogues');
-        $this->catalogueRef->setAccessible(true);
     }
 
     public function getName()
@@ -31,9 +25,16 @@ class TransFilterCompiler implements FilterCompilerInterface
 
     public function compile(JsCompiler $compiler, \Twig_Node_Expression_Filter $node)
     {
-        if (!$locale = $compiler->getDefine('locale')) {
+        if (!$locale = $compiler->getDefine('locale') || !$this->translator instanceof Translator) {
             return false;
         }
+
+        // unfortunately, the Translation component does not provide a better
+        // way to retrieve these
+        $this->loadCatalogueRef = new \ReflectionMethod($this->translator, 'loadCatalogue');
+        $this->loadCatalogueRef->setAccessible(true);
+        $this->catalogueRef = new \ReflectionProperty($this->translator, 'catalogues');
+        $this->catalogueRef->setAccessible(true);
 
         // ignore dynamic messages, we cannot resolve these
         // users can still apply a runtime trans filter to do this
