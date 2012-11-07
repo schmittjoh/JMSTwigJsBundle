@@ -25,7 +25,7 @@ class TransFilterCompiler implements FilterCompilerInterface
 
     public function compile(JsCompiler $compiler, \Twig_Node_Expression_Filter $node)
     {
-        if (!$locale = $compiler->getDefine('locale') || !$this->translator instanceof Translator) {
+        if (!($locale = $compiler->getDefine('locale')) || !$this->translator instanceof Translator) {
             return false;
         }
 
