@@ -14,7 +14,7 @@
     "require": {
         "php": ">=5.3.2",
         "jms/twig-js": "dev-master",
-        "symfony/framework-bundle": ">=2.0,<2.2-dev"
+        "symfony/framework-bundle": "2.*,<2.3"
     },
     "autoload": {
         "psr-0": { "JMS\\TwigJsBundle": "" }
