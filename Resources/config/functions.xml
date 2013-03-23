@@ -9,14 +9,7 @@
     </parameters>
 
     <services>
-        <!--
-            Routing Compiler
-
-            @see JMS\TwigJsBundle\TwigJs\Compiler\RoutingFunctionCompiler
-        -->
         <service id="twig_js.functions.routing_compiler" class="%twig_js.function.routing_compiler.class%" public="false">
-            <tag name="twig_js.function_compiler" function="url" />
-            <tag name="twig_js.function_compiler" function="path" />
             <argument type="service" id="router" />
         </service>
     </services>

@@ -42,18 +42,25 @@ class MountFunctionCompilersPass implements CompilerPassInterface
 
         $compiler = $container->getDefinition('twig_js.compiler');
 
+        // Find the tagged function compilers and add them to the javascript
+        // compiler
         foreach ($container->findTaggedServiceIds('twig_js.function_compiler')
             as $id => $tags) {
             foreach ($tags as $tag) {
                 if (!array_key_exists('function', $tag)) {
-                    var_dump($tag);
                     throw new \LogicException("When defining a TwigJS function complier you must specify the function name in the service tags 'function' attribute.");
                 }
 
-                $compiler->addMethodCall('setFunctionCompiler', array(
-                    $tag['function'],
-                    new Reference($id),
-                ));
+                // Function parameters
+                $params = array($tag['function'], new Reference($id));
+
+                // Add the priority if it has been set on the tag
+                if (array_key_exists('priority', $tag)) {
+                    $params[] = (int) $tag['priority'];
+                }
+
+                // Add the function compiler dependancy
+                $compiler->addMethodCall('addFunctionCompiler', $params);
             }
         }
     }

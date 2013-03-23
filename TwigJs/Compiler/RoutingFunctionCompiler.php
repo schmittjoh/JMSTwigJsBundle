@@ -18,10 +18,11 @@
 
 namespace JMS\TwigJsBundle\TwigJs\Compiler;
 
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Route;
-use Twig_Node_Expression_Function;
+use Symfony\Component\Routing\RouterInterface;
 use Twig_Node_Expression_Constant;
+use Twig_Node_Expression_Function;
 use Twig_NodeInterface;
 use TwigJs\FunctionCompilerInterface;
 use TwigJs\JsCompiler;
@@ -52,6 +53,43 @@ class RoutingFunctionCompiler implements FunctionCompilerInterface
     }
 
     /**
+     * Indicates whether the routing function compiler can compile the specified
+     * function node.
+     *
+     * This test is based on whether the route identified for compilation can be
+     * converted to a static route for compilation. As such, variable route
+     * names cannot be compiled by the routing function compiler.
+     * 
+     * @param Twig_Node_Expression_Function $node Node for compilation
+     * @return boolean TRUE if the node can be compiled; FALSE otherwise.
+     */
+    public function canCompile(Twig_Node_Expression_Function $functionNode)
+    {
+        $argumentsNode = $functionNode->getNode('arguments');
+
+        // Function must be passed at least one argument to allow compilation
+        if (count($argumentsNode) < 1) {
+            return false;
+        }
+
+        // The first element must be a constant to allow compilation
+        $argumentsNodeIterator = $argumentsNode->getIterator();
+        list(,$routeNameNode) = each($argumentsNodeIterator);
+        if (!$routeNameNode instanceof Twig_Node_Expression_Constant) {
+            return false;
+        }
+
+        // The route must exist
+        $routeName = $routeNameNode->getAttribute('value');
+        if (!$this->router->getRouteCollection()->get($routeName)) {
+            return false;
+        }
+
+        // The node can be compiled
+        return true;
+    }
+
+    /**
      * Compiles a twig function for use in javascript and compiles a method call
      * appropriate for the specified node.
      * 
@@ -63,44 +101,19 @@ class RoutingFunctionCompiler implements FunctionCompilerInterface
         // Function arguments
         $argumentNodes = iterator_to_array($functionNode->getNode('arguments'));
 
-        // Ensure that the argument list is not empty
-        if (empty($argumentNodes)) {
-            throw new \RuntimeException(sprintf(
-                "Can't compile %s function for javascript when no arguments are provided.",
-                $functionNode->getAttribute('name')
-            ));
-        }
-
         // First argument will be the route
         $routeNode = array_shift($argumentNodes);
-
-        // Only text nodes are supported as the routing path
-        if ($routeNode instanceof Twig_Node_Expression_Constant) {
-            $routeName = $routeNode->getAttribute('value');
-        } else {
-            $compiler
-                ->raw("(function(){throw ")
-                ->string(sprintf(
-                    "Only static route names can be compiled for javascript %s. Node type '%s' is not supported.",
-                    $node->getAttribute('name'),
-                    get_class($routeNode)
-                ))
-                ->raw(";})()")
-            ;
-            return;
-        }
+        $routeName = $routeNode->getAttribute('value');
 
         // Get the route name from the node
         $route = $this->router->getRouteCollection()->get($routeName);
 
         // When no route exists throw an exception
         if (!$route) {
-            $compiler
-                ->raw("(function(){throw ")
-                ->string(sprintf("Can't find route named '%s'", $routeName))
-                ->raw(";})()")
-            ;
-            return;
+            throw new RouteNotFoundException(sprintf(
+                "Could not find route '%s' when compiling javascript templates.",
+                $routeName
+            ));
         }
 
         // Open lambda
