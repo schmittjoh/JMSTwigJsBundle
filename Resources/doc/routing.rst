@@ -21,9 +21,8 @@ How to enable this feature
 
 Add the following lines to your application configuration:
 
-```yaml
-# app/config/config.yml
-twig_js:
+::
+    # app/config/config.yml
+    twig_js:
 
-    route_compilation: true
-```
+        route_compilation: true
