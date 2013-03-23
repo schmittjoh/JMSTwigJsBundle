@@ -22,6 +22,7 @@ How to enable this feature
 Add the following lines to your application configuration:
 
 ::
+
     # app/config/config.yml
     twig_js:
 
