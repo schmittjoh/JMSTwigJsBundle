@@ -37,6 +37,28 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('twig_js');
 
+        $rootNode
+            ->children()
+                ->arrayNode('route_compilation')
+                    ->info("Enables inline route compilation")
+                    ->treatFalseLike(array('url' => false, 'path' => false))
+                    ->treatTrueLike(array('url' => true, 'path' => true))
+                    ->treatNullLike(array('url' => true, 'path' => true))
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('url')
+                            ->defaultFalse()
+                            ->treatNullLike(false)
+                        ->end()
+                        ->booleanNode('path')
+                            ->defaultFalse()
+                            ->treatNullLike(false)
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+
         return $treeBuilder;
     }
 }

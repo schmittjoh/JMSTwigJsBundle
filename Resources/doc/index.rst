@@ -55,6 +55,14 @@ to specify all of them.
 
 See twig.js_ documentation for how to render your templates.
 
+Router Integration
+~~~~~~~~~~~~~~~~~~
+
+You can integrate the symfony2 router into twig.js_ using built in features
+or other libraries. See `Routing Integration`_ for more information.
+
+.. _`Routing Integration`: routing.rst
+
 Custom Integration
 ~~~~~~~~~~~~~~~~~~
 If you need to customize your integration, this bundle makes a service named

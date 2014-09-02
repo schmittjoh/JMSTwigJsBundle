@@ -41,6 +41,31 @@ class JMSTwigJsExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
         $loader->load('filters.xml');
+        $loader->load('functions.xml');
+
+        // Load the route compilation if it is defined
+        if (array_key_exists('route_compilation', $config)) {
+            $this->loadRouteCompilationConfig($config['route_compilation'], $container);
+        }
+    }
+
+    /**
+     * Configure the service container for route compilation
+     *
+     * @param array            $config    Route compilation configuration
+     * @param ContainerBuilder $container Service container
+     */
+    protected function loadRouteCompilationConfig(array $config, ContainerBuilder $container)
+    {
+        $routingCompiler = $container->getDefinition('twig_js.functions.routing_compiler');
+
+        if ($config['path']) {
+            $routingCompiler->addTag('twig_js.function_compiler', array('function' => 'path'));
+        }
+
+        if ($config['url']) {
+            $routingCompiler->addTag('twig_js.function_compiler', array('function' => 'url'));
+        }
     }
 
     public function getAlias()
