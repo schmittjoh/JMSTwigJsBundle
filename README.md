@@ -1,4 +1,4 @@
-[![Build Status](https://secure.travis-ci.org/forknetwork/TwigJsBundle.png)](http://travis-ci.org/forknetwork/TwigJsBundle)
+[![Build Status](https://travis-ci.org/ForkNetwork/TwigJsBundle.svg)](https://travis-ci.org/ForkNetwork/TwigJsBundle)
 
 TwigJsBundle
 ============
