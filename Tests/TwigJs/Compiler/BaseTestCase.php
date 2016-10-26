@@ -8,7 +8,14 @@ use Symfony\Bundle\TwigBundle\Extension\AssetsExtension;
 
 abstract class BaseTestCase extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \Twig_Extension
+     */
     protected $env;
+
+    /**
+     * @var JsCompiler
+     */
     protected $compiler;
 
     protected function compile($source, $name = null)

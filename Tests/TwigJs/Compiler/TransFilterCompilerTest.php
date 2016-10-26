@@ -11,6 +11,9 @@ use Symfony\Component\Translation\IdentityTranslator;
 
 class TransFilterCompilerTest extends BaseTestCase
 {
+    /**
+     * @var Translator
+     */
     private $translator;
 
     public function testCompile()
@@ -18,7 +21,7 @@ class TransFilterCompilerTest extends BaseTestCase
         $this->compiler->setDefine('locale', 'de');
         $this->addMessages(array('foo' => 'bar'), 'messages', 'de');
 
-        $this->assertContains('sb.append("bar");', $this->compile('{{ "foo"|trans|raw }}'));
+        $this->assertContains('sb.append(this.env_.filter("trans", "foo"));', $this->compile('{{ "foo"|trans|raw }}'));
     }
 
     public function testCompileWithParameters()
@@ -27,7 +30,7 @@ class TransFilterCompilerTest extends BaseTestCase
         $this->addMessages(array('remaining' => '%nb% remaining'));
 
         $this->assertContains(
-            'sb.append(twig.filter.replace("%nb% remaining", {"%nb%": tmp_nb}));',
+            'sb.append(this.env_.filter("trans", "remaining", {"%nb%": ("nb" in context ? context["nb"] : null)}));',
             $this->compile('{{ "remaining"|trans({"%nb%": nb})|raw }}')
         );
     }
