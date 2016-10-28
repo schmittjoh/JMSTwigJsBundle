@@ -2,7 +2,7 @@
 
 TwigJsBundle
 ============
-The revive of an old classic. Now including support for Symfony 3!
+The revival of an old classic. Now includes support for Symfony 3!
 
 
 For documentation, see:
