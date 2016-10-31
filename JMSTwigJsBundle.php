@@ -25,11 +25,17 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class JMSTwigJsBundle extends Bundle
 {
+    /**
+     * {@inheritdoc}
+     */
     public function getContainerExtension()
     {
         return new JMSTwigJsExtension();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new MountFilterCompilersPass());

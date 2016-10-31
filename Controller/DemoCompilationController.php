@@ -18,12 +18,11 @@
 
 namespace JMS\TwigJsBundle\Controller;
 
-use TwigJs\CompileRequest;
-
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use TwigJs\CompileRequest;
 
 /**
  * Demo Compilation Controller.

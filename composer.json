@@ -7,6 +7,10 @@
     "license": "Apache2",
     "authors": [
         {
+            "name": "Rolf Babijn",
+            "email": "mailrolf@gmail.com"
+        },
+        {
             "name": "Johannes M. Schmitt",
             "email": "schmittjoh@gmail.com",
             "role": "Legacy developer"
