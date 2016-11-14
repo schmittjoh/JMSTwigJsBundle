@@ -4,25 +4,45 @@ namespace JMS\TwigJsBundle\TwigJs\Compiler;
 
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\Translation\TranslatorInterface;
-use TwigJs\JsCompiler;
 use TwigJs\FilterCompilerInterface;
+use TwigJs\JsCompiler;
 
 class TransFilterCompiler implements FilterCompilerInterface
 {
+    /**
+     * @var TranslatorInterface
+     */
     private $translator;
+
+    /**
+     * @var \ReflectionMethod
+     */
     private $loadCatalogueRef;
+
+    /**
+     * @var \ReflectionProperty
+     */
     private $catalogueRef;
 
+    /**
+     * @param TranslatorInterface $translator
+     */
     public function __construct(TranslatorInterface $translator)
     {
         $this->translator = $translator;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'trans';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function compile(JsCompiler $compiler, \Twig_Node_Expression_Filter $node)
     {
         if (!($locale = $compiler->getDefine('locale')) || !$this->translator instanceof Translator) {
@@ -79,6 +99,10 @@ class TransFilterCompiler implements FilterCompilerInterface
         ;
     }
 
+    /**
+     * @param string $locale
+     * @return \Symfony\Component\Translation\MessageCatalogue
+     */
     private function getCatalogue($locale)
     {
         $this->loadCatalogueRef->invoke($this->translator, $locale);

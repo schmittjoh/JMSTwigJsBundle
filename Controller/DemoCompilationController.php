@@ -18,11 +18,11 @@
 
 namespace JMS\TwigJsBundle\Controller;
 
-use TwigJs\CompileRequest;
-
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use TwigJs\CompileRequest;
 
 /**
  * Demo Compilation Controller.
@@ -36,8 +36,15 @@ use Symfony\Component\DependencyInjection\ContainerAware;
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class DemoCompilationController extends ContainerAware
+class DemoCompilationController implements ContainerAwareInterface
 {
+    use ContainerAwareTrait;
+
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws \Exception
+     */
     public function compileAction(Request $request)
     {
         $compileRequest = new CompileRequest($request->query->get('name'), null);

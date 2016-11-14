@@ -14,10 +14,10 @@ Add the following to your ``deps`` file::
     [JMSTwigJsBundle]
         git=https://github.com/schmittjoh/JMSTwigJsBundle.git
         target=/bundles/JMS/TwigJsBundle
-        
+
     [twig.js]
         git=https://github.com/schmittjoh/twig.js.git
-    
+
 Then register the bundle with your kernel::
 
     // in AppKernel::registerBundles()
@@ -51,7 +51,7 @@ to the assets that you want to run through twig.js::
     {% endjavascripts %}
 
 If your template has dependencies on parent templates, or traits, make sure
-to specify all of them. 
+to specify all of them.
 
 See twig.js_ documentation for how to render your templates.
 
